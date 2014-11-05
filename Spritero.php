@@ -45,5 +45,12 @@
 			fputs($this->image->getImageBlob(),$fp);
 			fclose($fp);
 		}
+
+		//Count the # of frames in an existing sprite file
+		static function countFrames($imageData,$frameWidth=100) {
+			$im = new Imagick();
+			$im->readImageBlob($imageData);
+			return floor($im->getImageWidth() / $frameWidth);
+		}
 	}
 ?>
