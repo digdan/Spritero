@@ -26,7 +26,8 @@
 		}
 		function addFrame($source) {
 			$tmp = $this->image;
-			$im = new Imagick($source);
+			$im = new Imagick();
+			$im->readImageBlob($source);
 			$tmp->addImage($im);
 			$tmp->resetIterator();
 			$this->image = $tmp->appendImages();
