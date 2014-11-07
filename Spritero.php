@@ -73,11 +73,16 @@
 			$iter = (isset($params['iterations'])?$params['iterations']:'infinite');
 			$className = (isset($params['class'])?$params['class']:'animated');
 			$animName = (isset($params['animation'])?$params['animation']:'anim');
+			$sprite = (isset($params['sprite']?$params['sprite']:NULL);
 
 			$def = ".".$className." {\n";
 			$def .= "\twidth:".$this->width."px;\n";
 			$def .= "\theight:".$this->height."px;\n";
-			$def .= "\tbackground-image: url(data:".$mime.";base64,".base64_encode($this->getBlob()).");\n";
+			if (is_null($sprite)) {
+				$def .= "\tbackground-image: url(data:".$mime.";base64,".base64_encode($this->getBlob()).");\n";
+			} else {
+				$def .= "\tbackground-image: url({$sprite});\n";
+			}
 			$def .= "\t-webkit-animation: ".$animName." ".$seconds."s steps(".$this->frameCount.",end) ".$iter.";\n";
 			$def .= "\t-moz-animation: ".$animName." ".$seconds."s steps(".$this->frameCount.",end) ".$iter.";\n";
 			$def .= "\tanimation: ".$animName." ".$seconds."s steps(".$this->frameCount.",end) ".$iter.";\n";
